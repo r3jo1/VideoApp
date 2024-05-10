@@ -2,8 +2,12 @@ package com.rejowan.videoapp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rejowan.videoapp.databinding.ActivityHomeBinding
 import com.rejowan.videoapp.interfaces.OnItemClicked
@@ -25,7 +29,9 @@ class Home : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
         setContentView(binding.root)
+
 
         adapter = VideoAdapter(mutableListOf(), object : OnItemClicked {
             override fun onItemClicked(videoModel: VideoModel) {

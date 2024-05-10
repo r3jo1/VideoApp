@@ -21,6 +21,7 @@
             android:name=".ui.activity.VideoView"
             android:exported="false" />
         <activity
+            android:theme="@style/SplashTheme"
             android:name=".ui.activity.Home"
             android:exported="true">
             <intent-filter>
