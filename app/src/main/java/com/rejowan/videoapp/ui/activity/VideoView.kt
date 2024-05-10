@@ -24,7 +24,6 @@ class VideoView : AppCompatActivity() {
         title = intent.getStringExtra("title").toString()
         videoUrl = intent.getStringExtra("videoUrl").toString()
 
-        Log.e("VideoView", "onCreate: $title $videoUrl")
 
         binding.title.text = title
         binding.title.maxLines = 1
