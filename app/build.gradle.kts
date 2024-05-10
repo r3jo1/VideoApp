@@ -46,7 +46,6 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.firebase.messaging)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -58,8 +57,6 @@ dependencies {
     // koin
     implementation(libs.koin.android)
 
-    // work manager
-    implementation(libs.androidx.work.runtime.ktx)
 
     // swipe refresh layout
     implementation(libs.androidx.swiperefreshlayout)
@@ -72,4 +69,6 @@ dependencies {
 
     // firebase
     implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.messaging)
+
 }
