@@ -28,6 +28,7 @@ class VideoViewModel(private val videoRepository: VideoRepository) : ViewModel()
                 if (videosFromDB.isEmpty()) {
                     videoRepository.insertVideosToDB(videosFromAPI)
                     _videos.value = videosFromAPI
+                    Log.e("VideoViewModel", "DB empty, Inserted and returned videos from API")
                     return@launch
                 }
 
@@ -45,10 +46,16 @@ class VideoViewModel(private val videoRepository: VideoRepository) : ViewModel()
 
                 if (newVideos.isNotEmpty()) {
                     videoRepository.insertVideosToDB(newVideos)
+                    Log.e("VideoViewModel", "" + newVideos.size + "New videos added")
+                } else {
+                    Log.e("VideoViewModel", "No new videos")
                 }
 
                 if (updatedVideos.isNotEmpty()) {
                     videoRepository.updateVideosToDB(updatedVideos)
+                    Log.e("VideoViewModel", "" + updatedVideos.size + "Updated videos")
+                } else {
+                    Log.e("VideoViewModel", "No updated videos")
                 }
 
                 _videos.value = videosFromAPI
