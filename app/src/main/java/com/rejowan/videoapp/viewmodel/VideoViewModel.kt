@@ -1,11 +1,14 @@
 package com.rejowan.videoapp.viewmodel
 
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rejowan.videoapp.model.VideoModel
 import com.rejowan.videoapp.repository.VideoRepository
+import kotlinx.coroutines.Runnable
 import kotlinx.coroutines.launch
 
 class VideoViewModel(private val videoRepository: VideoRepository) : ViewModel() {
@@ -13,12 +16,24 @@ class VideoViewModel(private val videoRepository: VideoRepository) : ViewModel()
     private val _videos = MutableLiveData<List<VideoModel>>()
     val videos: MutableLiveData<List<VideoModel>> get() = _videos
 
+    private val handler = Handler(Looper.getMainLooper())
+    private val updateInterval: Long = 5 * 60 * 1000
 
     init {
+
         getAndUpdateVideos()
+
+        handler.postDelayed(object : Runnable {
+            override fun run() {
+                Log.e("VideoViewModel", "Updating videos runnable")
+                getAndUpdateVideos()
+                handler.postDelayed(this, updateInterval)
+            }
+        }, updateInterval)
+
     }
 
-    private fun getAndUpdateVideos() {
+    fun getAndUpdateVideos() {
 
         viewModelScope.launch {
             try {
@@ -91,5 +106,11 @@ class VideoViewModel(private val videoRepository: VideoRepository) : ViewModel()
         }
     }
 
+
+    override fun onCleared() {
+        super.onCleared()
+        Log.e("VideoViewModel", "onCleared")
+        handler.removeCallbacksAndMessages(null)
+    }
 
 }

@@ -25,8 +25,7 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
@@ -56,4 +55,13 @@ dependencies {
 
     // koin
     implementation(libs.koin.android)
+
+    // work manager
+    implementation(libs.androidx.work.runtime.ktx)
+
+    // swipe refresh layout
+    implementation(libs.androidx.swiperefreshlayout)
+
+    // glide
+    implementation(libs.glide)
 }
