@@ -1,5 +1,6 @@
 package com.rejowan.videoapp.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +29,9 @@ class Home : AppCompatActivity() {
 
         adapter = VideoAdapter(mutableListOf(), object : OnItemClicked {
             override fun onItemClicked(videoModel: VideoModel) {
+                startActivity(Intent(this@Home, VideoView::class.java)
+                    .putExtra("title",videoModel.title)
+                    .putExtra("videoUrl", videoModel.videoUrl))
 
             }
         })
