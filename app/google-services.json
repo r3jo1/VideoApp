@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "412978810032",
+    "project_id": "videoapp-40c91",
+    "storage_bucket": "videoapp-40c91.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:412978810032:android:dc7d8aed2431c719f4ff75",
+        "android_client_info": {
+          "package_name": "com.rejowan.videoapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBivKufC2YsLgR998wdI9Z3iti6BEHXiXU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
