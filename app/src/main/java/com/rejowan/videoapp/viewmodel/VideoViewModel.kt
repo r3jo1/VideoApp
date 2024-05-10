@@ -37,6 +37,7 @@ class VideoViewModel(private val videoRepository: VideoRepository) : ViewModel()
 
                 for (apiVideo in videosFromAPI) {
                     val existingVideo = videosFromDB.find { it.id == apiVideo.id }
+
                     if (existingVideo == null) {
                         newVideos.add(apiVideo)
                     } else if (existingVideo != apiVideo) {
@@ -46,14 +47,14 @@ class VideoViewModel(private val videoRepository: VideoRepository) : ViewModel()
 
                 if (newVideos.isNotEmpty()) {
                     videoRepository.insertVideosToDB(newVideos)
-                    Log.e("VideoViewModel", "" + newVideos.size + "New videos added")
+                    Log.e("VideoViewModel", "" + newVideos.size + " New videos added")
                 } else {
                     Log.e("VideoViewModel", "No new videos")
                 }
 
                 if (updatedVideos.isNotEmpty()) {
                     videoRepository.updateVideosToDB(updatedVideos)
-                    Log.e("VideoViewModel", "" + updatedVideos.size + "Updated videos")
+                    Log.e("VideoViewModel", "" + updatedVideos.size + " Updated videos")
                 } else {
                     Log.e("VideoViewModel", "No updated videos")
                 }

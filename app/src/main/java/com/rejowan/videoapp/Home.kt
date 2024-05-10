@@ -30,7 +30,7 @@ class Home : AppCompatActivity() {
         }
 
 
-        videoViewModel.getVideos()
+      //  videoViewModel.getVideos()
 
         videoViewModel.videos.observe(this) {
             if (it.isNotEmpty()) it.forEach { video ->
