@@ -1,12 +1,14 @@
 package com.rejowan.videoapp.ui.activity
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen.SplashScreen
+import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rejowan.videoapp.databinding.ActivityHomeBinding
@@ -26,6 +28,11 @@ class Home : AppCompatActivity() {
 
     private lateinit var adapter: VideoAdapter
 
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission(),
+    ) { _: Boolean ->
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,9 +42,10 @@ class Home : AppCompatActivity() {
 
         adapter = VideoAdapter(mutableListOf(), object : OnItemClicked {
             override fun onItemClicked(videoModel: VideoModel) {
-                startActivity(Intent(this@Home, VideoView::class.java)
-                    .putExtra("title",videoModel.title)
-                    .putExtra("videoUrl", videoModel.videoUrl))
+                startActivity(
+                    Intent(this@Home, VideoView::class.java).putExtra("title", videoModel.title)
+                        .putExtra("videoUrl", videoModel.videoUrl)
+                )
 
             }
         })
@@ -58,8 +66,22 @@ class Home : AppCompatActivity() {
             binding.swipeRefreshLayout.isRefreshing = false
         }
 
+        askNotificationPermission()
 
 
+    }
+
+
+    private fun askNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
     }
 
 
