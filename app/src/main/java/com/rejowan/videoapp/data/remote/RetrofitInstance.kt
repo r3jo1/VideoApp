@@ -4,7 +4,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
-    private const val BASE_URL = "https://gist.githubusercontent.com/"
+  //  private const val BASE_URL = "https://gist.githubusercontent.com/"
+    private const val BASE_URL = "https://gist.github.com/"
 
     val retrofit: Retrofit by lazy {
         Retrofit.Builder()
